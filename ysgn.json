@@ -14,7 +14,7 @@
       "year": "#year#",
       "hot": "#hot#",
       "parser": "js: function() {
-        const items = document.querySelectorAll('div.co_content8 table tbody tr');
+        const items = document.querySelectorAll(\'div.co_content8 table tbody tr\');
         const result = [];
         items.forEach(item => {
           const title = item.querySelector('a').textContent.trim();
