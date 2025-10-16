@@ -1,0 +1,64 @@
+{
+  "version": "2025.10.16",
+  "author": "CodeNinja",
+  "name": "影视光年·全平台资源库",
+  "description": "聚合全网影视资源，支持查看更新日期、热度评分、年份分类等功能",
+  "icon": "https://example.com/icon.png",
+  "group": "影视",
+  "rules": [
+    {
+      "name": "电影天堂·最新电影",
+      "group": "电影",
+      "url": "https://www.dytt8.net/html/gndy/dyzz/index.html",
+      "update_date": "#update_date#",
+      "year": "#year#",
+      "hot": "#hot#",
+      "parser": "js: function() {
+        const items = document.querySelectorAll('div.co_content8 table tbody tr');
+        const result = [];
+        items.forEach(item => {
+          const title = item.querySelector('a').textContent.trim();
+          const url = 'https://www.dytt8.net' + item.querySelector('a').href;
+          const updateDate = item.querySelector('td:nth-child(4)').textContent.trim();
+          const year = /\d{4}/.exec(title)[0];
+          const hot = Math.floor(Math.random() * 100); // 示例热度值，实际需替换为真实数据
+          result.push({
+            title: title,
+            url: url,
+            update_date: updateDate,
+            year: year,
+            hot: hot
+          });
+        });
+        return result;
+      }"
+    },
+    {
+      "name": "美剧巴士·热门剧集",
+      "group": "电视剧",
+      "url": "https://www.meijubus.com/",
+      "update_date": "#update_date#",
+      "year": "#year#",
+      "hot": "#hot#",
+      "parser": "js: function() {
+        const items = document.querySelectorAll('div.l-top > div.l-topbox');
+        const result = [];
+        items.forEach(item => {
+          const title = item.querySelector('h2 > a').textContent.trim();
+          const url = item.querySelector('h2 > a').href;
+          const updateDate = item.querySelector('p:nth-child(3)').textContent.match(/更新时间：(.*)/)[1];
+          const year = item.querySelector('p:nth-child(2)').textContent.match(/(\d{4})/)[1];
+          const hot = Math.floor(Math.random() * 100); // 示例热度值，实际需替换为真实数据
+          result.push({
+            title: title,
+            url: url,
+            update_date: updateDate,
+            year: year,
+            hot: hot
+          });
+        });
+        return result;
+      }"
+    }
+  ]
+}
